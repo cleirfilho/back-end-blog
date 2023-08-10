@@ -1,8 +1,9 @@
+import { usuarios_role } from '@prisma/client';
 import { IsEmail, IsString, MinLength } from 'class-validator';
 
 export class CreateUsuarioDto {
   @IsString()
-  name: string;
+  nome: string;
 
   @IsString()
   usuario: string;
@@ -15,5 +16,5 @@ export class CreateUsuarioDto {
   senha: string;
 
   @IsString()
-  role: string;
+  role: usuarios_role;
 }

@@ -9,7 +9,7 @@ datasource db {
 
 model usuarios {
   id        Int            @id @default(autoincrement())
-  nome      String
+  nome      String?
   usuario   String         @unique
   email     String         @unique
   senha     String
@@ -20,16 +20,16 @@ model usuarios {
 }
 
 model post {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime
-  published Boolean   @default(false)
-  titulo    String    @db.VarChar(255)
-  subtitulo String    @db.VarChar(255)
+  id              Int               @id @default(autoincrement())
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime
+  published       Boolean           @default(false)
+  titulo          String            @db.VarChar(255)
+  subtitulo       String            @db.VarChar(255)
   loca_publicacao local_publicacao?
-  texto     String    @db.LongText
-  autorId   Int?
-  usuarios  usuarios? @relation(fields: [autorId], references: [id], map: "Post_autorId_fkey")
+  texto           String            @db.LongText
+  autorId         Int?
+  usuarios        usuarios?         @relation(fields: [autorId], references: [id], map: "Post_autorId_fkey")
 
   @@index([autorId], map: "Post_autorId_fkey")
 }
@@ -38,6 +38,7 @@ enum usuarios_role {
   ADMIN
   USER
 }
+
 enum local_publicacao {
   BLOG
   SOBRE
